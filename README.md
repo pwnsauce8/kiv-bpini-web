@@ -39,7 +39,7 @@ work_folder
 |_ bachelor_web
 ```
 
-### Start
+## Start
 Change into the outer bachelor_web directory and run the following command to start server:
 
 ```
