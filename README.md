@@ -15,8 +15,8 @@ This project contains web-application to demonstrate work of 2 neural networks m
 
 For generating text, you need to download models. There are two SeqGAN models: based on big data-set and small data-set.
 
-* big_data_model (is a folder with model checkpoints) - https://drive.google.com/open?id=15CjKztCk5r042Y8S3OWR2uOhxbIomAdh
-* small_data_model (is a folder with model checkpoints) - 
+* **big_data_model** (is a folder with model checkpoints) - https://drive.google.com/open?id=15CjKztCk5r042Y8S3OWR2uOhxbIomAdh
+* **small_data_model** (is a folder with model checkpoints) - 
 
 This models need to be placed in a folder: `seqGAN-tensorflow-master/model/`
 
