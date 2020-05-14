@@ -1,0 +1,156 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<style>
+
+	body{
+		background-color: #638CB8;
+	}
+
+	input{
+		width: 100%;
+		padding: 12px 20px;
+		margin: 8px 0;
+		box-sizing: border-box;
+	}
+
+	input::placeholder {
+	  color: #d3d3d3;
+	}
+
+	.center-column{
+		width:600px;
+		margin: 20px auto;
+		padding:20px;
+		background-color: #fff;
+		border-radius: 4px;
+		box-shadow: 6px 2px 30px 0px rgba(0,0,0,0.75);
+	}
+
+	.white-item-row{
+		font-size: 20px;
+		margin: 10px;
+	}
+
+	.message-item-row{
+		background-color: #FF7066;
+		margin: 10px;
+		border-radius: 4px;
+		color: #fff;
+	}
+
+	.item-row{
+		white-space: pre;
+		background-color: #906abd;
+		margin: 10px;
+		padding: 20px;
+		border-radius: 4px;
+		color: #fff;
+		font-size: 16px;
+	}
+
+	.white-item-row input[type="text"],
+	.white-item-row textarea,
+	.white-item-row select {
+		border: none;
+		border-radius: 4px;
+		margin: 0;
+		outline: 0;
+		padding: 10px;
+		width: 100%;
+		box-sizing: border-box; 
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box; 
+		background-color: #e8eeef;
+		margin-bottom: 30px;
+	}
+
+    .ajaxProgress{
+        background-color: #906abd;
+		margin: 10px;
+		padding: 20px;
+		border-radius: 4px;
+		color: #fff;
+        display: none;
+    }
+
+    .img-container {
+        display: block;
+        margin-top: -90px;
+        margin-left: 40%;
+    }
+</style>
+
+<div class="center-column">
+
+	<h1 align="center">Movie dialogues generator</h1>
+
+	<div class="white-item-row">
+		<form id="form_id" method="POST" action={% url 'generate' %}>
+			{% csrf_token %}
+			<span>
+				{% for field in form %}
+                    {% if field.id_for_label == "id_select_genre" %}
+                        {{ field.label_tag }} <p style="color:red; font-size:70%; display:inline;">(Not available now)</p> {{ field }}
+                    {% elif field.id_for_label == "id_first_word" %}
+                        <p id="fw_note_id2" style="display:inline;">First word:</p> <p id="fw_note_id" style="color:black; font-size:70%; display:inline;">(* Available for RNN model only)</p> {{ field }}
+                    {% else %}
+                        {{ field.label_tag }} {{ field }}
+                    {% endif %}
+		    	{% endfor %}
+			</span>
+			
+			<input class="btn btn-info" type="submit" value="Generate!">
+
+		</form>
+	</div>
+
+<div class="ajaxProgress" style="white-space: pre-wrap;">
+    <h3 style="text-align: center;">Please, wait..</h3>
+    <p style="text-align: center; margin-top: -50px">(This process can long from 1 to 30 minutes)</p>
+    <div class="img-container">
+         {% load static %}
+         <img src="{% static "sub_app/ajax-loader.gif" %}" alt="loading" />
+    </div>
+</div>
+
+{% if messages %}
+    {% for message in messages %}
+            <div class="item-row" style="white-space: pre-wrap;">
+                {{ message }}
+            </div>
+        {% endfor %}
+{% endif %}
+
+	<h4>© Mukanova Zhanel, 2020</h4>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+{% block javascript %}
+    <script>
+
+    $(document).ready(function(){
+        document.getElementById('id_select_model').onchange = Hide;
+        Hide();
+        $('#form_id').submit(function(){
+
+            $('.ajaxProgress').show()
+        });
+    });
+
+    function Hide()
+    {
+        var s = $('#id_select_model').val();
+        if(s == "rnn") {
+            $('#id_first_word').show();
+            $('#fw_note_id').show();
+            $('#fw_note_id2').show();
+        } else {
+            $('#id_first_word').hide();
+            $('#fw_note_id').hide();
+            $('#fw_note_id2').hide();
+        }
+    }
+
+    </script>
+{% endblock %}
+
