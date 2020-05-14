@@ -43,7 +43,7 @@ work_folder
 Change into the outer bachelor_web directory and run the following command to start server:
 
 ```
-python3 manage . py runserver
+python3 manage.py runserver
 ```
 
 You will see the following output on the command line:
