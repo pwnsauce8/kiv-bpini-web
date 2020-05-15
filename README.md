@@ -5,10 +5,9 @@ This project contains web-application to demonstrate work of 2 neural networks m
 
 * Python 3
 * pip 3
-* django
 * cotk
 * TensorBoardX >= 1.4
-* Tensorflow == 1.13.1
+* Tensorflow == 2.0.0 on PC and Tensorflow == 1.13.1 on virtual environment
 * Django == 3.0.6
 
 ## Other data and projects
@@ -38,6 +37,69 @@ work_folder
 |_ seqGAN-tensorflow-master
 |_ bachelor_web
 ```
+
+## Before the start
+The problem of this web-application was that RNN model requires **Tensorflow2** and SeqGAN model requires **Tensorflow v1.13.1**.  And running two different versions of TensorFlow in a single cluster is unsupported. So the approach was to install one version of Tensorflow on PC and another on a virtual environment.
+
+For creating a virtual environment, you need to make these steps:
+
+* Install **python3-venv**
+
+```
+apt-get install python3-venv -y
+```
+
+* Create and activate a Python virtual environment
+
+```python3 -m venv venv
+   source ./venv/bin/activate
+   ```
+   
+* Update **PIP**
+
+```
+pip3 install -U pip3
+```
+
+* Update **setuptools**
+
+```
+(venv) root@ubuntu:~# pip install -U setuptools
+```
+
+* Install **TensorFlow**
+
+```
+pip3 install tensorflow==1.13.1
+```
+
+* Install **Tensorboard**
+
+```
+pip3 install tensorboardX
+```
+
+* Install **cotk**
+
+```
+pip3 install cotk
+```
+
+* Deactivate virtual environment 
+
+```
+deactivate
+```
+
+Now the virtual environment is ready to work.
+
+After you deactivate virtual environment, you need also to install Tensorflow to your PC:
+
+`pip3 install tensorflow==2.0.0b0`
+
+After these steps, you have a virtual environment with **Tensorflow v1.13.1**, and **Tensorflow v2.0.0b0** on your PC.
+A SeqGAN generating process will be started with virtual environment later.
+
 
 ## Start
 Change into the outer bachelor_web directory and run the following command to start server:
