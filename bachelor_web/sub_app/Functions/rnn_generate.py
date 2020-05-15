@@ -42,6 +42,7 @@ class RNN_generator:
 
     @staticmethod
     def generate_text(model, start_string, char2idx, idx2char):
+        print(">>> " + tf.__version__)
         # Evaluation step (generating text using the learned model)
 
         # Number of characters to generate
