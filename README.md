@@ -51,9 +51,10 @@ apt-get install python3-venv -y
 
 * Create and activate a Python virtual environment
 
-```python3 -m venv venv
-   source ./venv/bin/activate
-   ```
+```
+python3 -m venv venv
+source ./venv/bin/activate
+```
    
 * Update **PIP**
 
